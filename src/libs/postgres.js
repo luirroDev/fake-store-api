@@ -1,15 +1,10 @@
-const { Client } = require('pg');
+const { Pool } = require('pg');
+const { config } = require('../config/config');
 
-async function getConnection() {
-  const client = new Client({
-    host: 'localhost',
-    port: 5432,
-    user: 'postgres',
-    password: 'toor',
-    database: 'fakestore_db',
-  });
-  await client.connect();
-  return client;
-}
+const USER = encodeURIComponent(config.dbUser);
+const PASSWORD = encodeURIComponent(config.dbPassword);
+const URI = `postgres://${USER}:${PASSWORD}@${config.dbHost}:${config.dbPort}/${config.dbName}`;
 
-module.exports = getConnection;
+const pool = new Pool({ connectionString: URI });
+
+module.exports = pool;
