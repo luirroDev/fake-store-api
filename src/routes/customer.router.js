@@ -26,7 +26,7 @@ router.get(
   async (req, res, next) => {
     try {
       const { id } = req.params;
-      const customer = service.findOne(id);
+      const customer = await service.findOne(id);
       res.json(customer);
     } catch (error) {
       next(error);
@@ -36,12 +36,12 @@ router.get(
 
 router.post(
   '/',
-  validatorHandler(createCustomerSchema, 'params'),
+  validatorHandler(createCustomerSchema, 'body'),
   async (req, res, next) => {
     try {
       const body = req.body;
-      const newCustomer = service.create(body);
-      res.json(newCustomer);
+      const newCustomer = await service.create(body);
+      res.status(201).json(newCustomer);
     } catch (error) {
       next(error);
     }
