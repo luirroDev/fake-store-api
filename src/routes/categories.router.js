@@ -13,8 +13,7 @@ const service = new CategoryService();
 
 router.get('/', async (req, res, next) => {
   try {
-    const categories = await service.find();
-    res.json(categories);
+    res.json(await service.find());
   } catch (error) {
     next(error);
   }
@@ -28,6 +27,20 @@ router.get(
       const { id } = req.params;
       const category = await service.findOne(id);
       res.json(category);
+    } catch (error) {
+      next(error);
+    }
+  },
+);
+
+router.get(
+  '/:id/products',
+  validatorHandler(getCategorySchema, 'params'),
+  async (req, res, next) => {
+    try {
+      const { id } = req.params;
+      const products = await service.findProductByCategoryId(id);
+      res.json(products);
     } catch (error) {
       next(error);
     }
