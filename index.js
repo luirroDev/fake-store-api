@@ -28,6 +28,10 @@ app.use(cors(options));
 
 routerApi(app);
 
+app.use('/', (req, res) => {
+  res.send('Hello World');
+});
+
 app.use(logErrors);
 app.use(ormErrorHandler);
 app.use(boomErrorHandler);
