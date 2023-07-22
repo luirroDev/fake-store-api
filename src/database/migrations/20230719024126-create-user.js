@@ -3,8 +3,8 @@
 const { UserSchema, USERS_TABLE } = require('../models/user.model');
 const { CustomerSchema, CUSTOMER_TABLE } = require('../models/customer.model');
 const { ProductSchema, PRODUCT_TABLE } = require('../models/product.model');
-const { CategoySchema, CATEGORY_TABLE } = require('../models/category.model');
-const { OrdersSchema, ORDER_TABLE } = require('../models/order.model');
+const { CategorySchema, CATEGORY_TABLE } = require('../models/category.model');
+const { ORDER_TABLE } = require('../models/order.model');
 const {
   OrderProductSchema,
   ORDER_PRODUCT_TABLE,
@@ -17,7 +17,7 @@ module.exports = {
     await queryInterface.createTable(USERS_TABLE, UserSchema);
     await queryInterface.createTable(CUSTOMER_TABLE, CustomerSchema);
     await queryInterface.createTable(PRODUCT_TABLE, ProductSchema);
-    await queryInterface.createTable(CATEGORY_TABLE, CategoySchema);
+    await queryInterface.createTable(CATEGORY_TABLE, CategorySchema);
     await queryInterface.createTable(ORDER_TABLE, {
       id: {
         allowNull: false,
