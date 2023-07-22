@@ -9,6 +9,7 @@ const {
   OrderProductSchema,
   ORDER_PRODUCT_TABLE,
 } = require('../models/order-product.model');
+const { DataTypes } = require('sequelize');
 
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
@@ -17,7 +18,31 @@ module.exports = {
     await queryInterface.createTable(CUSTOMER_TABLE, CustomerSchema);
     await queryInterface.createTable(PRODUCT_TABLE, ProductSchema);
     await queryInterface.createTable(CATEGORY_TABLE, CategoySchema);
-    await queryInterface.createTable(ORDER_TABLE, OrdersSchema);
+    await queryInterface.createTable(ORDER_TABLE, {
+      id: {
+        allowNull: false,
+        autoIncrement: true,
+        primaryKey: true,
+        type: DataTypes.INTEGER,
+      },
+      customerId: {
+        field: 'customer_id',
+        allowNull: false,
+        type: DataTypes.INTEGER,
+        reference: {
+          model: CUSTOMER_TABLE,
+          key: 'id',
+        },
+        onUpdate: 'CASCADE',
+        onDelete: 'SET NULL',
+      },
+      createdAt: {
+        allowNull: false,
+        type: DataTypes.DATE,
+        field: 'created_at',
+        defaultValue: Sequelize.NOW,
+      },
+    });
     await queryInterface.createTable(ORDER_PRODUCT_TABLE, OrderProductSchema);
   },
 
