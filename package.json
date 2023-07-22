@@ -1,5 +1,5 @@
 {
-  "name": "my-store",
+  "name": "my-fake-store",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
@@ -12,8 +12,8 @@
     "migration:revert": "sequelize-cli db:migrate:undo"
   },
   "keywords": [],
-  "author": "",
-  "license": "ISC",
+  "author": "diazluisramon.dev@gmail.com<luirroDev>",
+  "license": "MIT",
   "devDependencies": {
     "eslint": "^8.45.0",
     "eslint-config-prettier": "^8.8.0",
