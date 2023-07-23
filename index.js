@@ -27,6 +27,8 @@ const options = {
 };
 app.use(cors(options));
 
+require('./src/utils/auth');
+
 routerApi(app);
 
 app.use('/nueva-ruta', checkApiKey, (req, res) => {
